@@ -1,0 +1,42 @@
+<?php
+ob_start();
+session_start();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+	  <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+	  <title><?php echo $page_title; ?></title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg p-3 bg-info navbar-dark">
+      <span class="navbar-brand display-1">Shopping Catalog</span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-links" aria-controls="nav-links" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="nav-links">
+          <div class="navbar-nav">
+              <?php
+              if( (isset($_SESSION['user_id'])) && ($_SESSION['user_level'] == 2)){
+              echo '<a class="nav-link" href="createItem.php"><button type="button" class="btn btn-secondary btn_autosize btn-block btn-outline-light">Item Creator</button></a>';
+              echo '<a class="nav-link" href="editItem.php?id= "><button type="button" class="btn btn-secondary btn_autosize btn-block btn-outline-light">Item Editor</button></a>';
+                echo '<a class="nav-link" href="userDisplay.php"><button type="button" class="btn btn-secondary btn_autosize btn-block btn-outline-light">View Users</button></a>';
+                }
+              if( (isset($_SESSION['user_id'])) && (basename($_SERVER['PHP_SELF']) != 'logout.php')) {
+                echo '<a class="nav-link" href="index.php"><button type="button" class="btn btn-secondary btn_autosize btn-block btn-outline-light">Home</button></a>';
+                echo '<a class="nav-link" href="catalogDisplay.php"><button type="button" class="btn btn-secondary btn_autosize btn-block btn-outline-light">View Catalog</button></a>';
+                echo '<a class="nav-link" href="yourCart.php"><button type="button" class="btn btn-secondary btn_autosize btn-block btn-outline-light">Your Cart</button></a>';
+                echo '<a class="nav-link" href="logout.php"><button type="button" class="btn btn-secondary btn_autosize btn-block btn-outline-light">Logout</button></a>';
+              } else {
+                echo '<a class="nav-link" href="login.php"><button type="button" class="btn btn-secondary btn_autosize btn-block btn-outline-light">Login</button></a>';
+              } ?>
+          </div>
+      </div>
+  </nav>
+  <div class="p-3 bg-light" style="min-height:100vh">
+</body>
